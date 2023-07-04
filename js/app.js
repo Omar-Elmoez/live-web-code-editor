@@ -2,11 +2,20 @@ document.getElementById("htmlCode").value="<div>\n\n</div>";
 document.getElementById("cssCode").value="<style>\n\n</style>";
 document.getElementById("jsCode").value="<script>\n\n</script>";
 
+if(localStorage.getItem('html') !== null || localStorage.getItem('css') !== null || localStorage.getItem('js') !== null) {
+    document.getElementById("htmlCode").value = localStorage.getItem('html');
+    document.getElementById("cssCode").value = localStorage.getItem('css');
+    document.getElementById("jsCode").value = localStorage.getItem('js');
+}
+
 function showPreview(){
-    var htmlCode = document.getElementById("htmlCode").value;
-    var cssCode = ""+document.getElementById("cssCode").value+"";
-    var jsCode = ""+document.getElementById("jsCode").value+"";
-    var frame = document.getElementById("preview-window").contentWindow.document;
+    let htmlCode = document.getElementById("htmlCode").value;
+    localStorage.setItem('html', htmlCode);
+    let cssCode = document.getElementById("cssCode").value;
+    localStorage.setItem('css', cssCode);
+    let jsCode = document.getElementById("jsCode").value;
+    localStorage.setItem('js', jsCode);
+    let frame = document.getElementById("preview-window").contentWindow.document;
     frame.open();
     frame.write(htmlCode+cssCode+jsCode);
     frame.close();
